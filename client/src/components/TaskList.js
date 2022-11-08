@@ -4,7 +4,8 @@ import TaskForm from './TaskForm'
 import axios from 'axios'
 import { URL } from '../App'
 import Task from './Task'
-
+import loadingImg from '../assets/loader.gif'
+ 
 export default function TaskList() {
 
     const [tasks, setTasks] = React.useState([])
@@ -73,6 +74,28 @@ export default function TaskList() {
           </p>
         </div>
         <hr />
+
+        {  
+            isLoading && (
+                <div className="--flex-center">
+                    <img src={loadingImg} alt="Loading..." />
+                </div>
+            )
+        }
+
+        {
+            !isLoading && tasks.length === 0 ? (
+                <p className='--py'>No task found. Add a task.</p>
+            ) : (
+                <>
+                {tasks.map((task, index) => {
+                    return(
+                        <Task />
+                    )
+                })}
+                </>
+            )
+        }
         <Task />
     </div>
   )
