@@ -11,9 +11,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
-    "backend": "npx nodemon server/server.js"
+    "backend": "npx nodemon server/server.js",
+    "frontend": "npm start --prefix client",
+    "full-stack": "concurrently \"npm run backend\" \"npm run frontend\" "
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^7.5.0"
+  }
 }
