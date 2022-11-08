@@ -3,12 +3,23 @@ import TaskList from './components/TaskList';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Task from './components/Task';
 
 function App() {
   return (
     <div className="app">
       <div className='task-container'>
         <TaskList />
+        <div className="--flex-between --pb">
+          <p>
+            <b>Total Tasks: </b> 0
+          </p>
+          <p>
+            <b>Completed Tasks: </b> 0
+          </p>
+        </div>
+        <hr />
+        <Task />
       </div>
       <ToastContainer />
     </div>
