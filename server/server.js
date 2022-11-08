@@ -4,6 +4,7 @@ const connectDB = require('./config/connectDB')
 const mongoose = require("mongoose")
 const Task = require("./models/taskModel")
 const taskRoutes = require('./routes/taskRoute')
+const cors = require("cors")
 
 
 const app = express()
@@ -26,6 +27,13 @@ app.use(express.json()) //Gives us data passed into body
 app.use(express.urlencoded({extended: false})) //Gives data passed into form
 
 app.use("/api/tasks", taskRoutes) //Appends api/tasks in front of routes
+
+
+app.use(
+    cors({
+        origin: ["http://localhost:3000/", ""]
+    })
+)
 //Routes
 app.get("/", (req, res) => {
     res.send("<h1>Home Page</h1>")
