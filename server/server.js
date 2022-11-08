@@ -2,6 +2,8 @@ const dotenv = require("dotenv").config() //Essential: It makes sure that server
 const express = require("express")
 const connectDB = require('./config/connectDB')
 const mongoose = require("mongoose")
+const Task = require("./model/taskModel")
+
 
 const app = express()
 
@@ -34,6 +36,10 @@ app.get("/tasks", (req, res) => {
 //Create a task
 
 app.post("/api/tasks", async (req, res) => {
-    console.log(req.body)
-    res.send("Task Created")
+    try{
+        const task = await Task.create(req.body)
+        res.status(200).json(task)
+    } catch(err){
+        res.status(500).json({msg: err.message })
+    }
 })
