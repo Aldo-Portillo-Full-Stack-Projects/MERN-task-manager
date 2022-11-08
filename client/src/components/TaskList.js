@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import TaskForm from './TaskForm'
 import axios from 'axios'
 import { URL } from '../App'
+import Task from './Task'
 
 export default function TaskList() {
 
@@ -30,8 +31,8 @@ export default function TaskList() {
         setIsLoading(true)
 
         try{
-            const response = await axios.get(`${URL}/api/tasks`)
-            console.log(response)
+            const {data} = await axios.get(`${URL}/api/tasks`)
+            setTasks(data)
             setIsLoading(false)
         } catch(err) {
             toast.error(err.message)
@@ -63,6 +64,16 @@ export default function TaskList() {
     <div>
         <h2>Task Manager</h2>
         <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask}/>
+        <div className="--flex-between --pb">
+          <p>
+            <b>Total Tasks: </b> 0
+          </p>
+          <p>
+            <b>Completed Tasks: </b> 0
+          </p>
+        </div>
+        <hr />
+        <Task />
     </div>
   )
 }
