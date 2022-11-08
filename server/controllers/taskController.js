@@ -1,4 +1,4 @@
-const Task = require("../model/taskModel");
+const Task = require("../models/taskModel");
 
 
 //File to save all callback functions
@@ -24,7 +24,26 @@ const getTasks = async (req, res) => {
     }
 }
 
+//Get task
+
+const getTask = async (req, res) => {
+    console.log("The params id " +req.params) //prints id
+
+    try{
+        const {id} = req.params;
+        const task = await Task.findById(id) // Allows us to find something by ID
+
+        if(!task){
+            return res.status(404).json(`NO task with id ${id}`)
+        }
+        res.status(200).json(task)
+    } catch (err ) {
+        res.status(500).json({msg: err.message})
+    }
+    res.send("Get single task")
+}
 module.exports = {
     createTask,
-    getTasks
+    getTasks,
+    getTask
 }
