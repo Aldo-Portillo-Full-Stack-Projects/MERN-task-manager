@@ -2,6 +2,7 @@ import React from 'react'
 import { toast } from 'react-toastify'
 import TaskForm from './TaskForm'
 import axios from 'axios'
+import { URL } from '../App'
 
 export default function TaskList() {
 
@@ -27,9 +28,11 @@ export default function TaskList() {
         }
 
         try{
-            await axios.post()
+            await axios.post(`${URL}/api/tasks`, formData)
+            toast.success("Task added successfully")
+            setFormData({...formData, name: ""})
         } catch (err) {
-
+            toast.error(err.message)
         }
     }
 
