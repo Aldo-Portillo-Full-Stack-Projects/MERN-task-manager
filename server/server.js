@@ -3,6 +3,7 @@ const express = require("express")
 const connectDB = require('./config/connectDB')
 const mongoose = require("mongoose")
 const Task = require("./model/taskModel")
+const taskRoutes = require('./routes/taskRoute')
 
 
 const app = express()
@@ -24,22 +25,13 @@ app.use(express.json()) //Gives us data passed into body
 
 app.use(express.urlencoded({extended: false})) //Gives data passed into form
 
+app.use(taskRoutes)
 //Routes
 app.get("/", (req, res) => {
     res.send("<h1>Home Page</h1>")
 })
 
-app.get("/tasks", (req, res) => {
-    res.send("<h1>Tasks Page</h1>")
-})
 
-//Create a task
 
-app.post("/api/tasks", async (req, res) => {
-    try{
-        const task = await Task.create(req.body)
-        res.status(200).json(task)
-    } catch(err){
-        res.status(500).json({msg: err.message })
-    }
-})
+
+//If you look at collections on mongoDB you will see that we have the title before the ? and a subfolder of tasks... the plural form of the schema is given to that subfolder'
