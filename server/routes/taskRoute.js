@@ -5,17 +5,17 @@ const router = express.Router()
 
     //Create a task
 
-    router.post("/api/tasks", createTask)
+    router.post("/", createTask)
     
     // Get all tasks
-    router.get("/api/tasks", getTasks)
+    router.get("/", getTasks)
 
     //Get single task
 
-    router.get("/api/tasks/:id", getTask) //Add params :id
+    router.get("/:id", getTask) //Add params :id
 
-    router.delete("/api/tasks/:id", deleteTask)
+    router.delete("/:id", deleteTask)
 
-    router.put("/api/tasks/:id", updateTask)
-
+    router.put("/:id", updateTask) //When using put you have to declare everything 
+    //Just change it to patch in route and controller to update a single part of data
 module.exports = router

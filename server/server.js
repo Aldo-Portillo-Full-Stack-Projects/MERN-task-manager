@@ -2,7 +2,7 @@ const dotenv = require("dotenv").config() //Essential: It makes sure that server
 const express = require("express")
 const connectDB = require('./config/connectDB')
 const mongoose = require("mongoose")
-const Task = require("./model/taskModel")
+const Task = require("./models/taskModel")
 const taskRoutes = require('./routes/taskRoute')
 
 
@@ -25,13 +25,11 @@ app.use(express.json()) //Gives us data passed into body
 
 app.use(express.urlencoded({extended: false})) //Gives data passed into form
 
-app.use(taskRoutes)
+app.use("/api/tasks", taskRoutes) //Appends api/tasks in front of routes
 //Routes
 app.get("/", (req, res) => {
     res.send("<h1>Home Page</h1>")
 })
-
-
 
 
 //If you look at collections on mongoDB you will see that we have the title before the ? and a subfolder of tasks... the plural form of the schema is given to that subfolder'
