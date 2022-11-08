@@ -6,6 +6,12 @@ import { URL } from '../App'
 
 export default function TaskList() {
 
+    const [tasks, setTasks] = React.useState([])
+
+    const[completedTasks, setCompletedTasks] = React.useState([])
+
+    const [isLoading, setIsLoading] = React.useState(false)
+
     const [formData, setFormData] = React.useState({
         name: "",
         completed: false
@@ -19,6 +25,23 @@ export default function TaskList() {
 
         setFormData({...formData, [name]: value})
     }
+
+    const getTasks = async () => {
+        setIsLoading(true)
+
+        try{
+            const response = await axios.get(`${URL}/api/tasks`)
+            console.log(response)
+            setIsLoading(false)
+        } catch(err) {
+            toast.error(err.message)
+            setIsLoading(false)
+        }
+    }
+
+    React.useEffect(() => {
+        getTasks()
+    }, [])
 
     const createTask = async (e) => {
         e.preventDefault();
