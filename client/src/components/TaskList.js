@@ -103,7 +103,7 @@ export default function TaskList() {
 
         const newFormData = {
             name: task.name,
-            completed: true, //I will add conditional true or false here so completed can be clicked to toggle true and false both ways
+            completed: !task.completed,
         }
         try{
             await axios.put(`${URL}/api/tasks/${task._id}`, newFormData)
