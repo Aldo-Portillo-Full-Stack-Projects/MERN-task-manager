@@ -60,6 +60,7 @@ export default function TaskList() {
             await axios.post(`${URL}/api/tasks`, formData)
             toast.success("Task added successfully")
             setFormData({...formData, name: ""})
+            getTasks()
         } catch (err) {
             toast.error(err.message)
         }
