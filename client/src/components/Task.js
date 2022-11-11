@@ -1,7 +1,7 @@
 import React from 'react'
 import {FaCheckDouble, FaEdit, FaRegTrashAlt} from 'react-icons/fa'
 
-export default function Task({task, name, index, deleteTask}) {
+export default function Task({task, name, index, deleteTask, getSingleTask}) {
 
   return (
     <div className='task'>
@@ -10,7 +10,7 @@ export default function Task({task, name, index, deleteTask}) {
         </p>
         <div className='task-icons'>
             <FaCheckDouble color='green' />
-            <FaEdit color='purple' />
+            <FaEdit color='purple' onClick={() => getSingleTask(task)}/>
             <FaRegTrashAlt color='red' onClick={() => deleteTask(task._id)}/>
         </div>
     </div>
