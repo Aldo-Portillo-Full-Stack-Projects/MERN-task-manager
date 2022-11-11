@@ -101,7 +101,7 @@ export default function TaskList() {
                 <>
                 {tasks.map((task, index) => {
                     return(
-                        <Task key={task._id} name={task.name} index={index} deleteTask={deleteTask} />
+                        <Task key={task._id} task={task} name={task.name} index={index} deleteTask={deleteTask} />
                     )
                 })}
                 </>
