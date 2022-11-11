@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 const Task = require("./models/taskModel")
 const taskRoutes = require('./routes/taskRoute')
 const cors = require("cors")
+const path = require("path")
 
 
 const app = express()
@@ -33,12 +34,23 @@ app.use(cors({
 
 app.use("/api/tasks", taskRoutes) //Appends api/tasks in front of routes
 
+//Deployment Code
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, "../frontend/build"))) //Targets build
+    app.get("*", (req, res) => { //Creates Routes
+        res.sendFile(
+            path.resolve(__dirname, "../", "frontend", "build", "index.html") 
+        )
+    })
+} else {
+    //Routes
+    app.get("/", (req, res) => {
+        res.send("<h1>Home Page</h1>")
+    })
+}
 
 
-//Routes
-app.get("/", (req, res) => {
-    res.send("<h1>Home Page</h1>")
-})
 
 
 //If you look at collections on mongoDB you will see that we have the title before the ? and a subfolder of tasks... the plural form of the schema is given to that subfolder'
