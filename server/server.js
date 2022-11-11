@@ -27,7 +27,9 @@ app.use(express.json()) //Gives us data passed into body
 app.use(express.urlencoded({extended: false})) //Gives data passed into form
 
 
-app.use(cors())
+app.use(cors({
+    origin: ["http://localhost:3000/", "https://task-manager.onrender.com"]
+})) //Optimize Cors to only accept requests from one origin
 
 app.use("/api/tasks", taskRoutes) //Appends api/tasks in front of routes
 
