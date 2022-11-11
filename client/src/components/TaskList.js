@@ -19,6 +19,8 @@ export default function TaskList() {
         completed: false
     })
 
+    
+
     const {name} = formData
 
     const handleInputChange = (e) => {
