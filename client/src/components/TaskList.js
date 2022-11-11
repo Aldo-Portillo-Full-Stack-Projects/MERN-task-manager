@@ -99,6 +99,20 @@ export default function TaskList() {
         }
     }
 
+    const setToComplete = async (task) => {
+
+        const newFormData = {
+            name: task.name,
+            completed: true, //I will add conditional true or false here so completed can be clicked to toggle true and false both ways
+        }
+        try{
+            await axios.put(`${URL}/api/tasks/${task._id}`, newFormData)
+            getTasks()
+        } catch (err) {
+            toast.error(err.message)
+        }
+    }
+
   return (
     <div>
         <h2>Task Manager</h2>
@@ -128,7 +142,7 @@ export default function TaskList() {
                 <>
                 {tasks.map((task, index) => {
                     return(
-                        <Task key={task._id} task={task} name={task.name} index={index} deleteTask={deleteTask} getSingleTask={getSingleTask}/>
+                        <Task key={task._id} task={task} name={task.name} index={index} deleteTask={deleteTask} getSingleTask={getSingleTask} setToComplete={setToComplete}/>
                     )
                 })}
                 </>
