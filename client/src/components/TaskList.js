@@ -82,10 +82,27 @@ export default function TaskList() {
         setIsEditing(true)
     }
 
+    const updateTask = async (e) => {
+        e.preventDefault()
+
+        if(name === "") {
+            return toast.error("Please fill input field")
+        }
+
+        try{
+            await axios.put(`${URL}/api/tasks/${taskID}`, formData)
+            setFormData({...formData, name: ""})
+            setIsEditing(false)
+            getTasks()
+        } catch (err) {
+            toast.error(err.message)
+        }
+    }
+
   return (
     <div>
         <h2>Task Manager</h2>
-        <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask} isEditing={isEditing}/>
+        <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask} isEditing={isEditing} updateTask={updateTask}/>
         <div className="--flex-between --pb">
           <p>
             <b>Total Tasks: </b> 0
