@@ -19,7 +19,9 @@ export default function TaskList() {
         completed: false
     })
 
-    
+    const [isEditing, setIsEditing] = React.useState(false)
+
+    const [taskID, setTaskID] = React.useState("")
 
     const {name} = formData
 
@@ -76,12 +78,14 @@ export default function TaskList() {
 
     const getSingleTask = async (task) => {
         setFormData({name: task.name, completed: false})
+        setTaskID(task._id)
+        setIsEditing(true)
     }
 
   return (
     <div>
         <h2>Task Manager</h2>
-        <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask}/>
+        <TaskForm name={name} handleInputChange={handleInputChange} createTask={createTask} isEditing={isEditing}/>
         <div className="--flex-between --pb">
           <p>
             <b>Total Tasks: </b> 0
