@@ -1,10 +1,10 @@
 import React from 'react'
 import {FaCheckDouble, FaEdit, FaRegTrashAlt} from 'react-icons/fa'
 
-export default function Task({task, name, index, deleteTask, getSingleTask, setToComplete}) {
+export default function Task({task, name, index, completed, deleteTask, getSingleTask, setToComplete}) {
 
   return (
-    <div className='task'>
+    <div className={completed ? "task completed" : "task"}>
         <p>
             <b>{index + 1}. </b> {name}
         </p>

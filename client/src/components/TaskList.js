@@ -142,7 +142,7 @@ export default function TaskList() {
                 <>
                 {tasks.map((task, index) => {
                     return(
-                        <Task key={task._id} task={task} name={task.name} index={index} deleteTask={deleteTask} getSingleTask={getSingleTask} setToComplete={setToComplete}/>
+                        <Task key={task._id} task={task} name={task.name} completed={task.completed} index={index} deleteTask={deleteTask} getSingleTask={getSingleTask} setToComplete={setToComplete}/> //There is an issue here i have to pass task.name and task.completed otherwise the app breaks if i try to access them in Task.js as task.name and task.completed
                     )
                 })}
                 </>
